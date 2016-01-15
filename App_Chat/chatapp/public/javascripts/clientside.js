@@ -41,11 +41,13 @@
 
 	function addParticipantsMessage(data){
 		var message = '';
+		
 		if (data.numUsers === 1){
-			message += "Esta logando apenas 1 pessoa"
+			message += "Esta logando apenas 1 pessoa";
 		} else {
 			message += "Estão logadas "+ data.numUsers + " pessoas ";
 		}
+		
 		log(message);	
 	}
 
@@ -58,23 +60,22 @@
 			$loginPage.off('click');
 			$currentInput = $inputMessage.focus();
 
-			socket.emit('add user');				
+			socket.emit('add user', username);	
 		}
 	}
 
 	function sendMessage() {
 		var message = $inputMessage.val();
 		
-		message = cleanInput(message);
-
-		if(message && connected){
-			$inputMessage.val("");
+		message = cleanInput(message);		
+		
+		if(message && connected){		
+			$inputMessage.val('');
 			addChatMessage({
 				username: username,
 				message: message
-			});
-			
-			socket.emit('new message', message);
+			});			
+		socket.emit('send message', message);			
 		}
 	}
 
@@ -83,27 +84,28 @@
 		addMessageElement($el, options);
 	}
 
-	function addChatMessage(data, options){
+	function addChatMessage(data, options){	
 		var $typingMessages = getTypingMessages(data);
-		options = options || {};
+				
+		options = options || {};		
 		if ($typingMessages.length !== 0){
 			options.fade = false;
 			$typingMessages.remove();
-		}
-
-
-	var $usernameDiv = $('<span class="username"/>')
-		.text(date.username)
-		.css('color', getUsernameColor(data.username));
-	var $messagebodyDiv = $('<span class="messageBody">')
-		.text(data.message);
-
-	var typingClass = data.typing ? 'typing' : '';
-	var $messageDiv = $('<li class="message"/>')
-		.data('username', data.username)
-		.addClass(typingClass)
-		.append($usernameDiv, $messageBodyDiv);
+		}		
 		
+		var $usernameDiv = $('<span class="username"/>')
+			.text(data.username)
+			.css('color', getUsernameColor(data.username));						
+		var $messagebodyDiv = $('<span class="messageBody">')
+			.text(data.message);	
+					
+		var typingClass = data.typing ? 'typing' : '';
+				
+		var $messageDiv = $('<li class="message"/>')
+			.data('username', data.username)
+			.addClass(typingClass)
+			.append($usernameDiv, $messageBodyDiv);
+					
 		addMessageElement($messageDiv, options);
 	}
 
@@ -164,8 +166,15 @@
 			}, TYPING_TIMER_LENGHT);
 		}
 	}
+	
+	function getTypingMessages(data){
+		return $('.typing.message').filter(function (i){
+			return $(this).data('username') === data.username;
+		});
+	}
 
 	function getUsernameColor (username){
+		
 		var hash = 7;
 		for(var i = 0; i < username.length; i++){
 			hash = username.charCodeAt(i) + (hash << 5) - hash;
