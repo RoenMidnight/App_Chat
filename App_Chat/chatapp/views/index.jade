@@ -1,0 +1,24 @@
+﻿extends layout
+
+block content
+	.container
+		.row
+			.col-lg-8.chat-page
+				#chat
+					ul.messages
+				#chat-text-box
+					form(role="form").form-enviar-mensagem
+						.form-group
+							input(type="text" placeholder="Digite sua mensagem")#inputMessage.form-control
+						button(type="submit").btn.btn-primary Enviar
+			.col-lg-4.login.page
+				form(role="form").form-alterar-nome
+					.form-group
+						label(for="nome") Alterar Nome
+						input(type="text" placeholder="Informe seu novo nome")#usernameInput.form-control
+					button(type="submit").btn.btn-primary Alterar
+				
+				hr
+				
+				h2 Updates
+				ul.updates
