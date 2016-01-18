@@ -68,14 +68,14 @@
 		var message = $inputMessage.val();
 		
 		message = cleanInput(message);		
-		
+
 		if(message && connected){		
 			$inputMessage.val('');
 			addChatMessage({
 				username: username,
 				message: message
 			});			
-		socket.emit('send message', message);			
+		socket.emit('send message', message);	
 		}
 	}
 
@@ -94,9 +94,9 @@
 		}		
 		
 		var $usernameDiv = $('<span class="username"/>')
-			.text(data.username)
+			.text(data.username+': ')
 			.css('color', getUsernameColor(data.username));						
-		var $messagebodyDiv = $('<span class="messageBody">')
+		var $messageBodyDiv = $('<span class="messageBody">')
 			.text(data.message);	
 					
 		var typingClass = data.typing ? 'typing' : '';
@@ -116,7 +116,7 @@
 	}
 
 	function removeChatTyping(data){
-		getTypingMessages(date).fadeOut(function(){
+		getTypingMessages(data).fadeOut(function(){
 			$(this).remove();
 		});
 	}
@@ -158,7 +158,7 @@
 			
 			setTimeout(function (){
 				var typingTimer = (new Date()).getTime();
-				var timeDiff = typingTimer - lastTypingtime;
+				var timeDiff = typingTimer - lastTypingTime;
 				if (timeDiff >= TYPING_TIMER_LENGHT && typing){
 					socket.emit('stop typing');
 					typing = false;
@@ -174,7 +174,7 @@
 	}
 
 	function getUsernameColor (username){
-		
+	
 		var hash = 7;
 		for(var i = 0; i < username.length; i++){
 			hash = username.charCodeAt(i) + (hash << 5) - hash;
@@ -227,7 +227,7 @@
 		addParticipantsMessage(data);
 	});
 
-	socket.on('send message', function(data){
+	socket.on('message sent by user', function(data){
 		addChatMessage(data);
 	});
 

@@ -79,12 +79,9 @@ io.sockets.on('connection', function(socket){
 	//Mostra para os outros usuários que um novo usuário acabou de entrar
 	socket.broadcast.emit('user in', {userid: userid});
 	
-	socket.on('change name', function(data){
-		var nome = data.nome;
-		socket.username = nome;
-		
-		socket.emit('name changed', {nome: nome});
-		socket.broadcast.emit('user changed name', {userid: userid, nome: nome});
+	socket.on('change name', function(data){	
+		socket.emit('name changed', {username: socket.username});
+		socket.broadcast.emit('user changed name', {userid: userid, username: socket.username});
 	});	
 	
 	socket.on('add user', function(username){
@@ -108,6 +105,12 @@ io.sockets.on('connection', function(socket){
 		});
 	});
 	
+	socket.on('stop typing',function(){
+		socket.broadcast.emit('stop typing',{
+			username: socket.username
+		});
+	});
+	
 	socket.on('disconnect', function(){
 		if(addedUser){
 			--numUsers;
@@ -123,7 +126,7 @@ io.sockets.on('connection', function(socket){
 	socket.on('send message', function(data){
 				
 		socket.emit('message sent', {message: data.message});
-		socket.broadcast.emit('message sent by user', {message: data.message, nome: socket.username});
+		socket.broadcast.emit('message sent by user', {message: data, username: socket.username});
 	});
 });
 
