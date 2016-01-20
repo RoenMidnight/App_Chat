@@ -2,18 +2,27 @@
 
 block content
 	.container
-		.row
-			.col-lg-8.chat-page
-				#chat
-					ul.messages
-				#chat-text-box
-					input(type="text" placeholder="Digite sua mensagem")#inputMessage.form-control
-					
-			.col-lg-4.login.page
+		.row		
+			#chat.chat-page
+				#chat_head Chat Box
+				#chat_body Chat Body
+				#chat_user 
+				
+			#chat-text-box(style="right:290px")
+				#msg_head Xablaw
+					#close
+				#msg_wrap
+					#msg_body
+						ul.messages
+					#msg_push
+				#msg_footer
+					textarea(placeholder="Digite sua mensagem")#inputMessage.form-control		
+		
+			#login.login.page
 				label(for="nome") Alterar Nome
 				input(type="text" placeholder="Informe seu novo nome")#usernameInput.form-control
 								
 				hr
-				
-				h2 Updates
-				ul.updates
+			
+			h2 Updates
+			ul.updates

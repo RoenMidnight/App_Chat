@@ -1,20 +1,148 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: #16a085;
+  margin: 0px;
+  height: 900px
+  font-family: sans-serif;
 }
+#chat{
+	position:fixed;
+	right: 20px;
+	bottom: 0px;
+	widht: 250px;
+}
+#chat_body{
+	background: white;
+	height: 400px;
+	padding: 5px 0px;
+}
+
+#chat_head, #msg_head{
+	background:#f39c12;
+	color: white;
+	padding: 15px;
+	font-weight: bold;
+	cursor: pointer;
+	border-radius:5px 5px 0px 0px;
+}
+
+#chat-text-box{
+	position:fixed;
+	bottom: -5px;
+	width: 250px;
+	background: white;
+	border-radius: 5px 5px 0px 0px;
+}
+#msg_head{
+	background:#3498db
+}
+#msg_body{
+	background: white;
+	height: 200px;
+	font-size: 12px;
+	padding: 15px;
+	overflow: auto;
+	overflow-x: hidden;
+}
+#inputMessage{
+	widht: 100%;
+	border: 1px solid white;
+	border-top: 1px solid #DDDDDD;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+#close{
+	float:right;
+	cursor: pointer;
+}
+#minimize{
+	float: right;
+	cursor: pointer;
+	padding-right: 5px;
+}
+#chat_user{
+	position:relative;
+	padding:10px 30px;
+}
+#chat_user:before{
+	content:'';
+	position:absolute;
+	background:#2ecc71;
+	height:10px;
+	widht:10px;
+	left:10px;
+	top:15;
+	border-radius:6px;
+}
+#chat_user:hover{
+	background:#f8f8f8;
+	cursor: pointer;
+}
+
+.messages{
+	position:relative;
+	background:#FDE4CE;
+	padding:10px;
+	min-height:10px;
+	margin-bottom: 5px;
+	margim-right:10px;
+	border-radius: 5px;
+}
+
+.messages:before{
+	content:"";
+	position: absolute;
+	width:0px;
+	height:0px;
+	border:10px solid;
+	border-color: transparent #FDE4CE transparent transparent;
+	left: -20px;
+	top: 7px;
+}
+
+ul.messages{
+	list-style: none;
+}
+
+.msg_b{
+	background: #EEF2E7;
+	padding: 10px;
+	min-height:15px;
+	margin-bottom:5px;
+	position:relative;
+	margin-left:10px;
+	border-radius:5px
+}
+
+.msg_b:after{
+	content:"";
+	position:absolute;
+	width: 0px;
+	height: 0px;
+	border: 10px solid;
+	border-color: transparent transparent transparent #EEF2E7;
+	right: -20px;
+	top: 7px;
+}
+
 
 a {
   color: #00B7FF;
 }
 
-#chat{
+/*#chat{
 	border: 1px solid #CCC;
 	height: 500px;
 	margin-botton: 10px;
 	padding: 10px;
-	overflow: hidden;
-	ul li	{border-bottom: 1px solid #CCC;
+	overflow: auto;
+	ul li { border-bottom: 1px solid #CCC;
 			padding-bottom: 5px;
 			margin-bottom:  5px;
-			list-style: none;}		
+			list-style: none; }		
 	}
+ul.messages{
+	list-style: none;
+}*/
